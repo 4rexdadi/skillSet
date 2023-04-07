@@ -1,0 +1,207 @@
+@font-face {
+	font-family: "Brandon Grotesque Black";
+	src: local("Brandon Grotesque Black"),
+		url("fonts/Brandon-Grotesque/brandon-grotesque-black.otf")
+			format("opentype");
+	font-display: swap;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Proxima Nova Regular";
+	src: local("Proxima Nova Regular"),
+		url("fonts/Proxima-Nova/Proxima-Nova-Regular.otf") format("opentype");
+	font-display: swap;
+	font-style: normal;
+}
+
+:root {
+	--black: #000000;
+	--white: #f0e7e7;
+	--secondary: #00aaa9;
+
+	/* fonts sizes */
+	--h4: 2.625rem;
+	--h5: 1.875rem;
+	--h6: 1.313rem;
+	--fontbg: 1.313rem;
+	--fontmd: 0.931rem;
+	--fontsm: 0.656rem;
+
+	/* line heights */
+	--lh4: 3rem;
+	--lh5: 2.5rem;
+	--lh6: 1.875rem;
+	--lhbg: 1.875rem;
+	--lhmd: 127.3%;
+	--lhsm: 127.3%;
+
+	/* fonts */
+	--secondary-font-black: "Brandon Grotesque Black", sans-serif;
+	--base-font-regular: "Proxima Nova Regular", sans-serif;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	color: var(--white);
+	list-style: none;
+}
+
+body {
+	font-family: var(--secondary-font-black);
+	line-height: var(--lhbg);
+	font-size: var(--fontbg);
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
+	background: var(--black);
+}
+
+.cubeFace .icon {
+	fill: #ffffff66;
+	height: 100px;
+	width: 100px;
+}
+
+.scroll {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+}
+
+.svg {
+	width: 50px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.svg svg {
+	width: 30px;
+	height: 30px;
+	color: var(--secondary);
+	fill: var(--secondary);
+	animation: upAndDown 2s ease-in-out infinite alternate;
+}
+
+h1 {
+	text-align: center;
+	font-family: var(--base-font-regular);
+	line-height: var(--lh4);
+	font-size: var(--h4);
+}
+
+.skills {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 150px;
+	padding: 15px;
+}
+
+.skills .skillsItems::before {
+	content: "▹";
+	left: 0px;
+	color: var(--secondary);
+}
+
+.cubeContainer {
+	padding: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.cubeScene {
+	--_cubeSize: 150px;
+	--_transformCubeSize: calc(
+		var(--_cubeSize) - var(--_cubeSize) - var(--_cubeSize)
+	);
+	--_animationTime: 12s;
+
+	width: var(--_cubeSize);
+	height: var(--_cubeSize);
+	perspective: calc(var(--_cubeSize) * 2);
+}
+
+.cube {
+	width: var(--_cubeSize);
+	height: var(--_cubeSize);
+	position: relative;
+	transform-style: preserve-3d;
+	transform: translateZ(calc(var(--_transformCubeSize) / 2));
+	transition: transform 1s;
+
+	animation: spinCube ease var(--_animationTime) infinite;
+}
+
+.cubeFace {
+	position: absolute;
+	width: var(--_cubeSize);
+	height: var(--_cubeSize);
+	background-color: rgba(255, 255, 255, 0.4);
+	border: 2px solid #ccc;
+	box-shadow: 0 0 30px 0px var(--secondary);
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.cube-front {
+	transform: rotateY(0deg) translateZ(calc(var(--_cubeSize) / 2));
+}
+.cube-right {
+	transform: rotateY(90deg) translateZ(calc(var(--_cubeSize) / 2));
+}
+.cube-back {
+	transform: rotateY(180deg) translateZ(calc(var(--_cubeSize) / 2));
+}
+.cube-left {
+	transform: rotateY(-90deg) translateZ(calc(var(--_cubeSize) / 2));
+}
+.cube-top {
+	transform: rotateX(90deg) translateZ(calc(var(--_cubeSize) / 2));
+}
+.cube-bottom {
+	transform: rotateX(-90deg) translateZ(calc(var(--_cubeSize) / 2));
+}
+
+@keyframes upAndDown {
+	from {
+		transform: translateY(5px);
+	}
+	to {
+		transform: translateY(-5px);
+	}
+}
+
+@keyframes spinCube {
+	to {
+		transform: translateZ(calc(var(--_transformCubeSize) / 2)) rotateY(0deg);
+	}
+
+	16% {
+		transform: translateZ(calc(var(--_transformCubeSize) / 2)) rotateY(-180deg);
+	}
+
+	33% {
+		transform: translateZ(calc(var(--_transformCubeSize) / 2)) rotateY(-90deg);
+	}
+
+	50% {
+		transform: translateZ(calc(var(--_transformCubeSize) / 2)) rotateX(-90deg);
+	}
+
+	66% {
+		transform: translateZ(calc(var(--_transformCubeSize) / 2)) rotateY(90deg);
+	}
+
+	83% {
+		transform: translateZ(calc(var(--_transformCubeSize) / 2)) rotateX(90deg);
+	}
+}
